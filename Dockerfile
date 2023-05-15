@@ -1,4 +1,4 @@
-FROM hashicorp/terraform:1.0.6
+FROM hashicorp/terraform:1.4.5
 
 LABEL repository="https://github.com/robburger/terraform-pr-commenter" \
       homepage="https://github.com/robburger/terraform-pr-commenter" \
@@ -8,11 +8,12 @@ LABEL repository="https://github.com/robburger/terraform-pr-commenter" \
       com.github.actions.icon="git-pull-request" \
       com.github.actions.color="purple"
 
-RUN apk add --no-cache -q \
-    bash \
-    curl \
-    jq
-
+RUN apk add \
+    --no-cache \
+    --quiet \
+    bash=~5 \
+    curl=~8 \
+    jq=~1
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
